@@ -4,16 +4,22 @@ include stdlib
 include system-update
 include python
 include apache
+include curl
 
 class {'::mongodb::server':
   auth => true,
 }
 
-mongodb::db { 'testdb':
+mongodb::db { 'devdb':
   user          => 'user1',
-  password_hash => 'a15fbfca5e3a758be80ceaf42458bcd8',  # hash of "user1:mongo:pass1"
+  password		=> 'pass1',
+  roles         => ['readWrite', 'dbAdmin'],
 }
 
 python::pip { 'awscli' :
     pkgname       => 'awscli'
+}
+
+python::pip { 'eve' :
+    pkgname       => 'eve'
 }
