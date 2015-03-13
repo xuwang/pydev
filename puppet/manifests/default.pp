@@ -10,7 +10,7 @@ class {'::mongodb::globals':
     manage_package_repo => true,
 }->
 class {'::mongodb::server':
-  #auth	  => true,
+  auth	  => true,
   bind_ip => ['0.0.0.0'],
   verbose => true,
 }->
@@ -24,7 +24,7 @@ mongodb_user { admin:
   roles         => ['dbAdminAnyDatabase','userAdminAnyDatabase','clusterAdmin'],
   tries         => 10,
   require       => Class['mongodb::server'],
-}
+}->
 mongodb::db { 'devdb':
   user          => 'user1',
   password	=> 'pass1',
@@ -34,7 +34,7 @@ mongodb_user { $dev:
   username      => $dev,
   ensure        => present,
   password_hash => mongodb_password($dev, $devpass),
-  database      => $devdb,
+  database      => 'devdb',
   roles         => ['readWrite', 'dbAdmin'],
   tries         => 10,
   require       => Class['mongodb::server'],
