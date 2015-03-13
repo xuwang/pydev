@@ -3,3 +3,8 @@
 .vagrant
 log 
 tarballs
+puppet/modules/
+envvars.sh
+puppet/.librarian/
+puppet/.tmp/
+puppet/Puppetfile.lock
