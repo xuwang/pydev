@@ -10,16 +10,16 @@ class {'::mongodb::globals':
     manage_package_repo => true,
 }->
 class {'::mongodb::server':
-  auth	  => true,
+  auth  => true,
   bind_ip => ['0.0.0.0'],
   verbose => true,
 }->
 class {'::mongodb::client': }
 
-mongodb_user { admin:
-  username      => $mongo_admin,
+mongodb_user { 'admin':
+  username      => 'admin',
   ensure        => present,
-  password_hash => mongodb_password($mongo_admin,$mongo_adminpass),
+  password_hash => mongodb_password('admin', 'changeme!'),
   database      => 'admin',
   roles         => ['dbAdminAnyDatabase','userAdminAnyDatabase','clusterAdmin'],
   tries         => 10,
