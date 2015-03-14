@@ -1,5 +1,8 @@
 #!/bin/sh
-sudo apt-get install -y git
-sudo apt-get install -y ruby-dev
+export DEBIAN_FRONTEND=noninteractive
+apt-get update -q
+sudo apt-get install -q -y git
+sudo apt-get install -q -y ruby-dev
 gem install librarian-puppet
 cd /vagrant/puppet && librarian-puppet install --path=/vagrant/puppet/modules
+sudo mkdir -p /etc/puppet && touch /etc/puppet/hiera.yaml

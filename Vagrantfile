@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "./", "/vagrant"
   
   config.vm.provision :shell, :path => "shell/install.sh"
-  config.vm.provision :shell, :path => "shell/envvars.sh"
+  config.vm.provision :shell, :path => "shell/facts.sh"
   
   config.vm.provision "puppet" do |puppet|
     puppet.temp_dir = "/tmp"
