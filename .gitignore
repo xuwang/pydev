@@ -3,7 +3,6 @@
 .vagrant
 log 
 tarballs
-puppet/modules/
 envvars.sh
 facts.sh
 puppet/.librarian/
