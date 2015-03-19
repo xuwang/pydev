@@ -6,6 +6,14 @@ include python
 include apache
 include curl
 
+python::pip { 'awscli' :
+  pkgname  => 'awscli' 
+}
+
+python::pip { 'eve' :
+  pkgname => 'eve'
+}
+
 class {'::mongodb::globals':
     manage_package_repo => true,
 }->
@@ -17,28 +25,11 @@ class {'::mongodb::server':
 class {'::mongodb::client': }
 
 mongodb_user { 'admin':
-  username      => 'admin',
+  username      => $mongo_admin,
   ensure        => present,
-  password_hash => mongodb_password('admin', 'changeme!'),
+  password_hash => mongodb_password($mongo_admin, $mongo_admin_pass),
   database      => 'admin',
-  roles         => ['dbAdminAnyDatabase','userAdminAnyDatabase','clusterAdmin'],
+  roles         => ['readWriteAnyDatabase', 'dbAdminAnyDatabase', 'userAdminAnyDatabase', 'clusterAdmin'],
   tries         => 10,
   require       => Class['mongodb::server'],
-}
-#mongodb_user { devdb:
-#  username      => $dev,
-#  ensure        => present,
-#  password_hash => mongodb_password($dev, $devpass),
-#  database      => 'devdb',
-#  roles         => ['readWrite', 'dbAdmin'],
-#  tries         => 10,
-#  require       => Class['mongodb::server'],
-#}
-
-python::pip { 'awscli' :
-  pkgname  => 'awscli' 
-}
-
-python::pip { 'eve' :
-  pkgname => 'eve'
 }
