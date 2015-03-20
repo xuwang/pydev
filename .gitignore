@@ -8,3 +8,5 @@ facts.sh
 puppet/.librarian/
 puppet/.tmp/
 puppet/Puppetfile.lock
+*.pyc
+*.pyo
