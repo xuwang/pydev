@@ -1,0 +1,3 @@
+[submodule "projects/eve-docs"]
+	path = projects/eve-docs
+	url = https://github.com/charlesflynn/eve-docs.git

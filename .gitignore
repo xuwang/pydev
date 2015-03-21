@@ -1,6 +1,9 @@
 .DS_Store
 .git
 .vagrant
+*.log
+*.pyc
+*.pyo
 log 
 tarballs
 envvars.sh
@@ -8,5 +11,3 @@ facts.sh
 puppet/.librarian/
 puppet/.tmp/
 puppet/Puppetfile.lock
-*.pyc
-*.pyo

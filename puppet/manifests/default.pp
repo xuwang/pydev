@@ -14,6 +14,10 @@ python::pip { 'eve' :
   pkgname => 'eve'
 }
 
+python::pip { 'eve' :
+  pkgname => 'flask-bootstrap'
+}
+
 class {'::mongodb::globals':
     manage_package_repo => true,
 }->
