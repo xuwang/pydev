@@ -76,8 +76,13 @@ people = {
 
     # most global settings can be overridden at resource level
     'resource_methods': ['GET', 'POST'],
+    
+    # After all, not forcing normalized information is one of the selling points 
+    # of MongoDB and many other NoSQL data stores.
+    'allow_unknown': True,
 
     'schema': schema_people
+    
 }
 
 DOMAIN = {

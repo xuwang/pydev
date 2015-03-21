@@ -9,6 +9,6 @@ It has following components installed:
 	* Flask
 	* Eve and Eve-doc: Python RESTful API Framework
 	* AWSCLI and botocore
-	* Mongodb
+	* MongoDB
 	* Apache2
 	
