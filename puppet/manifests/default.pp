@@ -9,13 +9,14 @@ include curl
 python::pip { 'awscli' :
   pkgname  => 'awscli' 
 }
-
 python::pip { 'eve' :
   pkgname => 'eve'
 }
-
 python::pip { 'flask-bootstrap' :
   pkgname => 'flask-bootstrap'
+}
+python::pip { 'docopt' :
+  pkgname => 'docopt'
 }
 
 class {'::mongodb::globals':

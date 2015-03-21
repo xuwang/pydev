@@ -6,6 +6,7 @@ It has following components installed:
 
 	* Curl
 	* Python
+	* Docopt
 	* Flask
 	* Eve and Eve-doc: Python RESTful API Framework
 	* AWSCLI and botocore
