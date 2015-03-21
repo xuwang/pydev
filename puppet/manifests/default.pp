@@ -14,7 +14,7 @@ python::pip { 'eve' :
   pkgname => 'eve'
 }
 
-python::pip { 'eve' :
+python::pip { 'flask-bootstrap' :
   pkgname => 'flask-bootstrap'
 }
 
