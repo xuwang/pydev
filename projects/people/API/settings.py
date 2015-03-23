@@ -24,6 +24,14 @@ HATEOAS = False
 schema_people = {
     # Schema definition, based on Cerberus grammar. Check the Cerberus project
     # (https://github.com/nicolaiarocci/cerberus) for details.
+    'email': {
+        'type': 'string',
+        'minlength': 4,
+        'maxlength': 50,
+        'required': True,
+        # this is an API entry-point, so we need it to be unique.
+        'unique': True,
+    },
     'firstname': {
         'type': 'string',
         'minlength': 1,
@@ -33,10 +41,6 @@ schema_people = {
         'type': 'string',
         'minlength': 1,
         'maxlength': 15,
-        'required': True,
-        # talk about hard constraints! For the purpose of the demo
-        # 'lastname' is an API entry-point, so we need it to be unique.
-        'unique': True,
     },
     # 'role' is a list, and can only contain values from 'allowed'.
     'role': {
@@ -64,10 +68,10 @@ people = {
     # by default the standard item entry point is defined as
     # '/people/<ObjectId>'. We leave it untouched, and we also enable an
     # additional read-only entry point. This way consumers can also perform
-    # GET requests at '/people/<lastname>'.
+    # GET requests at '/people/<login>'.
     'additional_lookup': {
         'url': 'regex("[\w]+")',
-        'field': 'lastname'
+        'field': 'email'
     },
 
     # We choose to override global cache-control directives for this resource.
@@ -79,7 +83,7 @@ people = {
     
     # After all, not forcing normalized information is one of the selling points 
     # of MongoDB and many other NoSQL data stores.
-    'allow_unknown': True,
+    # 'allow_unknown': True,
 
     'schema': schema_people
     

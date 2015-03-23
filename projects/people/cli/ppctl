@@ -1,0 +1,48 @@
+#! /usr/bin/env python
+"""
+Usage: 
+    ppctl [--version] [--help] [-v | --verbose][-e | --endpoint <PPAPI_ENDPOINT>] <command> [<args>...]
+    
+Options:
+    -e, --endpoint  The endpoint of the API, can also be passed in by env PPAPI_ENDPOINT.
+    -h, --help      Show this screen.
+    --version       Show version.
+    -v, --verbose   Verbose mode.
+    
+Arguments:
+    PPAPI_ENDPOINT  API's endpoint url, e.g. "http://localhost:5000/people"
+            
+The most commonly used ppctl commands are:
+    add     Add new people.
+    list    List people.
+    id      Get person's ID by email.
+    show    Get a person info by ID or email.
+    update  Update a person's info.
+    delete  Delete a person's info. 
+    help    Show help info.
+See 'ppctl help <command>' for more information on a specific command.
+
+"""
+
+from subprocess import call
+from docopt import docopt
+import importlib
+
+def main(args):
+    #print('global arguments:')
+    #print(args)
+    
+    commands = 'add list show update delete help'.split()
+    
+    if args['<command>'] in commands: 
+        argv = [args['<command>']] + args['<args>']
+        ppm = importlib.import_module("pp_%s" % args['<command>'])
+        args = docopt(ppm.__doc__, argv=argv)
+        ppm.main(args)
+    else:
+        exit("%r is not a ppctl command. See 'ppctl help'." % args['<command>'])
+
+if __name__ == '__main__':
+    args = docopt(__doc__, version='ppctl v1.0.0', options_first=True)
+    main(args)
+    
