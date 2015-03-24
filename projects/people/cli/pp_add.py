@@ -46,7 +46,7 @@ def main(args):
         
 def add_items(args, data):
     r = api_post(args['api_url'], args['resource'], data)
-    pp_json(r.json(), True):
+    pp_json(r.json(), True)
                     
         
 if __name__ == '__main__':

@@ -36,7 +36,7 @@ def main(args):
 
     resource = "%s/%s" % (args['resource'], id)
     r = api_patch(args['api_url'], resource, data)
-    pp_json(r.json(), True):
+    pp_json(r.json(), True)
         
         
 if __name__ == '__main__':
