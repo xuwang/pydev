@@ -24,8 +24,9 @@ def api_delete(api_url, resource):
 def api_get(api_url, resource):
     return requests.get(endpoint(api_url, resource))
 
-def get_id(api_url, resource):    
-    r = api_get(api_url, resource)
+def get_id(api_url, resource): 
+    # call with projection to reduce data traficing   
+    r = api_get(api_url, resource + '?projection={"_id": 1}')
     if r.status_code == 200:
         return r.json()['_id']
     else:
@@ -33,7 +34,7 @@ def get_id(api_url, resource):
         raise ValueError(err)
 
 def endpoint(api_url, resource):
-    return '%s/%s/' % (api_url, resource)
+    return '%s/%s' % (api_url, resource)
     
 def validate_json(data):
     json.loads(data)
