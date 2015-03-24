@@ -35,8 +35,6 @@ DEFAULT_ENDPOINT = 'http://localhost:5000/api'
 DEFAULT_RESOURCE = 'people'
 
 def main(args):
-    #print('global arguments:')
-    #print(args)
 
     commands = 'add list show update delete id doc help'.split()
     if args['<command>'] in commands: 

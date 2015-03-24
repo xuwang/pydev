@@ -26,7 +26,6 @@ from pp_util import *
 import json
 
 def main(args):
-    #print(args)
     data = ''
     if args['<data>']:
         data = args['<data>']
