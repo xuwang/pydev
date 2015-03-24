@@ -5,5 +5,5 @@ apt-get update -q
 sudo apt-get install -q -y git
 sudo apt-get install -q -y ruby-dev
 gem install librarian-puppet
-cd /vagrant/puppet && librarian-puppet install --path=/vagrant/puppet/modules
+cd /home/vagrant/puppet && librarian-puppet install --path=/home/vagrant/puppet/modules
 sudo mkdir -p /etc/puppet && touch /etc/puppet/hiera.yaml

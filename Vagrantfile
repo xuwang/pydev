@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
   # config.vm.network "forwarded_port", guest: 443, host: 443, auto_correct: true
   # config.vm.network "forwarded_port", guest: 80, host: 80, auto_correct: true
 
-  config.vm.synced_folder "./", "/vagrant"
+  config.vm.synced_folder "./", "/home/vagrant/host"
   
   config.vm.provision :shell, :path => "shell/install.sh"
   config.vm.provision :shell, :path => "shell/facts.sh"

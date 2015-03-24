@@ -33,13 +33,6 @@ def main(args):
     elif args['<username>']:
         add_people(args[args])
         
-
-def add_people_data(data):
-    raise NotImplementedError
-    
-def add_people_file(file):
-    raise NotImplementedError
-
 if __name__ == '__main__':
     args = docopt(__doc__)
     main(args)
