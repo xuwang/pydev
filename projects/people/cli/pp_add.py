@@ -17,21 +17,37 @@ Arguments:
   <lastname>    Person's lastname.
   
 Examples:
-  ppcli add '[{"email": "foobar@example.com", "firstname": "foo", "lastname": "bar"}]'
-  ppcli add --email=foobar@example.com
+  ppctl add '[{"email": "foobar@example.com", "firstname": "foo", "lastname": "bar"}]'
+  ppctl add --email=foobar@example.com
 
 """
 from docopt import docopt
-import pp_util
+from pp_util import *
+import json
 
 def main(args):
     #print(args)
+    data = ''
     if args['<data>']:
-        add_people_data(args['<data>'])
+        data = args['<data>']
     elif args['<file>']:
-        add_people_file(args['<file>'])
-    elif args['<username>']:
-        add_people(args[args])
+        with open( args['<file>']) as data_file:
+            data = data_file.read()
+    elif args['--email']:
+        item = {}
+        item['email'] = args['--email']
+        if args['--firstname']:
+            item['firstname'] = args['--firstname']
+        if args['--lastname']:
+            item['lastname'] = args['--lastname']
+        data = json.dumps(item)
+
+    add_items(args, data)
+        
+def add_items(args, data):
+    r = api_post(args['api_url'], args['resource'], data)
+    pp_json(r.json(), True):
+                    
         
 if __name__ == '__main__':
     args = docopt(__doc__)

@@ -9,10 +9,12 @@ import requests
 import json
 
 def api_post(api_url, resource, data):
+    validate_json(data)
     headers = {'Content-Type': 'application/json'}
     return requests.post(endpoint(api_url, resource), data, headers=headers)
 
 def api_patch(api_url, resource, data):
+    validate_json(data)
     headers = {'Content-Type': 'application/json'}
     return requests.patch(endpoint(api_url, resource), data, headers=headers)
 
@@ -32,6 +34,9 @@ def get_id(api_url, resource):
 
 def endpoint(api_url, resource):
     return '%s/%s/' % (api_url, resource)
+    
+def validate_json(data):
+    json.loads(data)
     
 def pp_json(j, pretty=False):
     if pretty:

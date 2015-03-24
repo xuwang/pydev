@@ -16,21 +16,29 @@ Arguments:
 
 """
 from docopt import docopt
-import pp_util
+from pp_util import *
+import json
 
 def main(args):
     #print(args)
-    
-    if args['<email>']:
-        id = get_id(args['<email>'])
+    data = ''
+    if args['<data>']:
+        data = args['<data>']
+    elif args['<file>']:
+        with open( args['<file>']) as data_file:
+            data = data_file.read()
+
+    if args.has_key('<email>'):
+        resource = "%s/%s" % (args['resource'], args['<email>'])
+        id = get_id(args['api_url'], resource)
     else:
         id = args['<id>']
-        
-    if args['<data>']:
-        update_people_data(id, args['<data>'])
-    elif args['<file>']:
-        update_people_file(args[id, '<file>'])
 
+    resource = "%s/%s" % (args['resource'], id)
+    r = api_patch(args['api_url'], resource, data)
+    pp_json(r.json(), True):
+        
+        
 if __name__ == '__main__':
     args = docopt(__doc__)
     main(args)

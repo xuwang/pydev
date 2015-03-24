@@ -1,0 +1,69 @@
+[
+    {
+        "born": "Thu, 27 Aug 1970 14:37:13 GMT",
+        "email": "jdoe@example.com",
+        "firstname": "John",
+        "lastname": "Doe",
+        "location": {
+            "address": "422 South Gay Street",
+            "city": "Auburn"
+        },
+        "role": [
+            "author"
+        ]
+    },
+    {
+        "born": "Wed, 25 Feb 1987 17:00:00 GMT",
+        "email": "slove@example.com",
+        "firstname": "Serena",
+        "lastname": "Love",
+        "location": {
+            "address": "363 Brannan St",
+            "city": "San Francisco"
+        },
+        "role": [
+            "author"
+        ]
+    },
+    {
+        "born": "Sat, 23 Feb 1985 12:00:00 GMT",
+        "email": "mgreen@example.com",
+        "firstname": "Mark",
+        "lastname": "Green",
+        "location": {
+            "address": "4925 Lacross Road",
+            "city": "New York"
+        },
+        "role": [
+            "copy",
+            "author"
+        ]
+    },
+    {
+        "born": "Sun, 20 Jul 1980 11:00:00 GMT",
+        "email": "jred@example.com",
+        "firstname": "Julia",
+        "lastname": "Red",
+        "location": {
+            "address": "98 Yatch Road",
+            "city": "San Francisco"
+        },
+        "role": [
+            "copy"
+        ]
+    },
+    {
+        "born": "Fri, 25 Sep 1970 10:00:00 GMT",
+        "email": "awhite@example.com",
+        "firstname": "Anne",
+        "lastname": "White",
+        "location": {
+            "address": "32 Joseph Street",
+            "city": "Ashfield"
+        },
+        "role": [
+            "contributor",
+            "copy"
+        ]
+    }
+]
