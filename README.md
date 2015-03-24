@@ -12,4 +12,8 @@ It has following components installed:
 	* AWSCLI and botocore
 	* MongoDB
 	* Apache2
-	
+
+To install Eve-doc git submodule:
+	cd pydev
+	git submodule update --init --recursive
+
