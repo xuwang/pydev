@@ -6,8 +6,6 @@
 *.pyo
 log 
 tarballs
-envvars.sh
-facts.sh
 puppet/.librarian/
 puppet/.tmp/
 puppet/Puppetfile.lock
