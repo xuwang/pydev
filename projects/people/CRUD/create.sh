@@ -3,5 +3,5 @@
 curl \
 	-s \
 	-H 'Content-Type: application/json'  http://127.0.0.1:5000/people \
-	-d '[{"firstname": "barack", "lastname": "obama"}, {"firstname": "mitt", "lastname": "romney"}]' \
+	-d '[{"email": "foo@example.com","firstname": "foo", "lastname": "bar"}, {"email": "foo1@example.com","firstname": "foo1", "lastname": "bar1"}]' \
 		| python -m json.tool
