@@ -4,7 +4,7 @@ from eve_docs import eve_docs
 
 app = Eve()
 Bootstrap(app)
-app.register_blueprint(eve_docs, url_prefix='/people/docs')
+app.register_blueprint(eve_docs, url_prefix='/api/people/docs')
 
 app.debug = True
 if __name__ == '__main__':

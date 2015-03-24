@@ -21,6 +21,11 @@ IF_MATCH = False
 # Disable HATEOAS (Hypermedia as the Engine of Application State)
 HATEOAS = False
 
+# URL prefix for all API endpoints. 
+URL_PREFIX = 'api'
+# API version. Will be used in conjunction with URL_PREFIX to build API endpoints
+# URL_PREFIX = 'v1'
+
 schema_people = {
     # Schema definition, based on Cerberus grammar. Check the Cerberus project
     # (https://github.com/nicolaiarocci/cerberus) for details.

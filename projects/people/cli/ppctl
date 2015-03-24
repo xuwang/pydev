@@ -1,16 +1,17 @@
 #! /usr/bin/env python
 """
 Usage: 
-    ppctl [--version] [--help] [-v | --verbose][-e | --endpoint <PPAPI_ENDPOINT>] <command> [<args>...]
+    ppctl [options] <command> [<args>...]
     
 Options:
-    -e, --endpoint  The endpoint of the API, can also be passed in by env PPAPI_ENDPOINT.
+    -e, --endpoint=<PP_ENDPOINT>  The endpoint of the API, can also be passed in by env PP_ENDPOINT.
+                    Default is http://localhost:5000/api
     -h, --help      Show this screen.
     --version       Show version.
     -v, --verbose   Verbose mode.
     
 Arguments:
-    PPAPI_ENDPOINT  API's endpoint url, e.g. "http://localhost:5000/people"
+    PPAPI_ENDPOINT  API's endpoint url, e.g. "http://localhost:5000/api"
             
 The most commonly used ppctl commands are:
     add     Add new people.
@@ -19,6 +20,7 @@ The most commonly used ppctl commands are:
     show    Get a person info by ID or email.
     update  Update a person's info.
     delete  Delete a person's info. 
+    doc     Show API spec.
     help    Show help info.
 See 'ppctl help <command>' for more information on a specific command.
 
@@ -27,21 +29,38 @@ See 'ppctl help <command>' for more information on a specific command.
 from subprocess import call
 from docopt import docopt
 import importlib
+import os
+
+DEFAULT_ENDPOINT = 'http://localhost:5000/api'
+DEFAULT_RESOURCE = 'people'
 
 def main(args):
     #print('global arguments:')
     #print(args)
-    
-    commands = 'add list show update delete help'.split()
-    
+
+    commands = 'add list show update delete id doc help'.split()
     if args['<command>'] in commands: 
         argv = [args['<command>']] + args['<args>']
         ppm = importlib.import_module("pp_%s" % args['<command>'])
         args = docopt(ppm.__doc__, argv=argv)
-        ppm.main(args)
+        ppm.main(set_endpoint_args(args))
     else:
         exit("%r is not a ppctl command. See 'ppctl help'." % args['<command>'])
-
+        
+def set_endpoint_args(args):
+    # set API_URL
+    if args.has_key('<PP_ENDPOINT>'):
+        args['api_url'] =  args['<PP_ENDPOINT>']
+    else:
+        if os.environ.has_key('<PP_ENDPOINT>'):
+            args['api_url'] =  os.environ['<PP_ENDPOINT>']
+        else:
+            args['api_url'] = DEFAULT_ENDPOINT
+                      
+    # set RESOURCE       
+    args['resource'] = DEFAULT_RESOURCE
+    return args
+    
 if __name__ == '__main__':
     args = docopt(__doc__, version='ppctl v1.0.0', options_first=True)
     main(args)

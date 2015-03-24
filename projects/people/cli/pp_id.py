@@ -9,13 +9,12 @@ Arguments:
 """
 
 from docopt import docopt
-import pp_util
+from pp_util import *
 
 def main(args):
-    #print(args)
-    get_id(args['<email>'])
+    resource = "%s/%s" % (args['resource'], args['<email>'])
+    print get_id(args['api_url'], resource)
         
-
 if __name__ == '__main__':
     args = docopt(__doc__)
     main(args)

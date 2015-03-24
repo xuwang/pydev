@@ -5,40 +5,39 @@ Usage:
 
 """
 from docopt import docopt
+import requests
 import json
-import pycurl
-from StringIO import StringIO
-        
-def get_list(args):
-    raise NotImplementedError
-    
-def add_people_data(data):
-    raise NotImplementedError
-    
-def add_people_file(file):
-    raise NotImplementedError
 
-def update_people_data(id, data):
-    raise NotImplementedError
-    
-def update_people_file(id, file):
-    raise NotImplementedError
-        
-def delete_people(e):
-    raise NotImplementedError
-    
-def delete_people_id(id):
-    raise NotImplementedError
-    
-def show_people(e):
-    raise NotImplementedError
-    
-def show_people_id(id):
-    raise NotImplementedError
-        
-def get_id(e):
-    raise NotImplementedError
+def api_post(api_url, resource, data):
+    headers = {'Content-Type': 'application/json'}
+    return requests.post(endpoint(api_url, resource), data, headers=headers)
 
+def api_patch(api_url, resource, data):
+    headers = {'Content-Type': 'application/json'}
+    return requests.patch(endpoint(api_url, resource), data, headers=headers)
 
+def api_delete(api_url, resource):
+    return requests.delete(endpoint(api_url, resource))
+
+def api_get(api_url, resource):
+    return requests.get(endpoint(api_url, resource))
+
+def get_id(api_url, resource):    
+    r = api_get(api_url, resource)
+    if r.status_code == 200:
+        return r.json()['_id']
+    else:
+        err = pp_json(r.json())
+        raise ValueError(err)
+
+def endpoint(api_url, resource):
+    return '%s/%s/' % (api_url, resource)
+    
+def pp_json(j, pretty=False):
+    if pretty:
+        print json.dumps(j, sort_keys=True,indent=4, separators=(',', ': '))
+    else:
+        print json.dumps(j)
+  
 if __name__ == '__main__':
    docopt(__doc__)
