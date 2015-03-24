@@ -4,7 +4,8 @@ Usage:
     ppcli.py list [options]
 
 Options
-    -p, --pretty-print  Pretty print the resoult
+    -n, --page=<page>   Page number for large list.
+    -p, --pretty-print  Pretty print the resoult.
     -h, --help          Show this page
 
 """
@@ -14,7 +15,11 @@ import json
 from pp_util import *
 
 def main(args):
-    r = api_get(args['api_url'], args['resource'])
+    resource = args['resource']
+    
+    if args["--page"]:
+       resource = "%s?page=%s" % (resource, args["--page"])
+    r = api_get(args['api_url'], resource)
     pp_json(r.json(), args['--pretty-print'])
         
 if __name__ == '__main__':
