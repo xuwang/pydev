@@ -15,13 +15,14 @@ Arguments:
             
 The most commonly used ppctl commands are:
     add     Add new people.
-    list    List people.
-    id      Get person's ID by email.
-    show    Get a person info by ID or email.
-    update  Update a person's info.
     delete  Delete a person's info. 
     doc     Show API spec.
-    help    Show help info.
+    help    Show usage info.
+    id      Get person's ID by email.
+    list    List people.
+    show    Get a person info by ID or email.
+    update  Update a person's info.
+    
 See 'ppctl help <command>' for more information on a specific command.
 
 """
@@ -33,11 +34,12 @@ import os
 
 DEFAULT_ENDPOINT = 'http://localhost:5000/api'
 DEFAULT_RESOURCE = 'people'
+COMMANDS = 'add delete doc help id list show update'.split()
 
 def main(args):
 
     commands = 'add list show update delete id doc help'.split()
-    if args['<command>'] in commands: 
+    if args['<command>'] in COMMANDS: 
         argv = [args['<command>']] + args['<args>']
         ppm = importlib.import_module("pp_%s" % args['<command>'])
         args = docopt(ppm.__doc__, argv=argv)

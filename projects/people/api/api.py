@@ -14,7 +14,6 @@ def pre_get_callback(resource, request, lookup):
 app.on_pre_GET += pre_get_callback
 
 # non-resource endpoints, see http://flask.pocoo.org/
-
 @app.route("/hello/<thing>")
 def hello(thing):
     return "Hello %s!" % thing
