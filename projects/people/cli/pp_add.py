@@ -4,9 +4,11 @@ Usage:
   ppctl add <data> 
   ppctl add (-f | --file) <file> 
   ppctl add --email=<email> [--firstname=<firstname>] [--lastname=<lastname>]
+  ppctl add --help
   
 Options:
   -f --file     Data in file.
+  --help        Show this page
   
 Arguments:
   <data>        Data in json format. 
@@ -21,8 +23,9 @@ Examples:
   ppctl add --email=foobar@example.com
 
 """
+import sys
 from docopt import docopt
-from pp_util import *
+from pp_util import api_post, pp_json
 import json
 
 def main(args):
@@ -40,8 +43,14 @@ def main(args):
         if args['--lastname']:
             item['lastname'] = args['--lastname']
         data = json.dumps(item)
-
-    add_items(args, data)
+        
+    try:
+        add_items(args, data)
+        pass
+    except ValueError,e:
+        print(e)
+        print(__doc__)
+        sys.exit(1)
         
 def add_items(args, data):
     r = api_post(args['api_url'], args['resource'], data)

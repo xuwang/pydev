@@ -3,9 +3,11 @@
 Usage:
   ppctl update (--email=<email> | --id=<id>) <data> 
   ppctl update (--email=<email> | --id=<id>) -f <file> 
+  ppctl update --help
   
 Options:
   -f --file     Data in file.
+  -h, --help    Show this page.
   
 Arguments:
   <data>        Data in json format. 
@@ -16,8 +18,9 @@ Arguments:
 
 """
 from docopt import docopt
-from pp_util import *
+from pp_util import api_patch, get_id, pp_json
 import json
+import sys
 
 def main(args):
     data = ''
@@ -27,15 +30,22 @@ def main(args):
         with open( args['<file>']) as data_file:
             data = data_file.read()
 
-    if args.has_key('<email>'):
-        resource = "%s/%s" % (args['resource'], args['<email>'])
+    if args['--email']:
+        resource = "%s/%s" % (args['resource'], args['--email'])
         id = get_id(args['api_url'], resource)
     else:
-        id = args['<id>']
+        id = args['--id']
 
     resource = "%s/%s" % (args['resource'], id)
-    r = api_patch(args['api_url'], resource, data)
-    pp_json(r.json(), True)
+        
+    try:
+        r = api_patch(args['api_url'], resource, data)
+        pp_json(r.json(), True)
+        pass
+    except ValueError,e:
+        print(e)
+        print(__doc__)
+        sys.exit(1)
         
         
 if __name__ == '__main__':
